@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
@@ -83,4 +84,11 @@ func v1TimeToRFC3339(ctx context.Context, d *transform.TransformData) (interface
 	default:
 		return nil, fmt.Errorf("Invalid time format %T!\n", v)
 	}
+}
+
+func isNotFoundError(err error) bool {
+	if strings.HasSuffix(err.Error(), "not found") {
+		return true
+	}
+	return false
 }

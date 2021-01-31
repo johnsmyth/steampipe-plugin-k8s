@@ -24,7 +24,11 @@ func Plugin(ctx context.Context) *plugin.Plugin {
 		// 	ShouldIgnoreError: isNotFoundError([]string{"ResourceNotFoundException", "NoSuchEntity"}),
 		// },
 		TableMap: map[string]*plugin.Table{
-			"k8s_pod": tableK8sPod(ctx),
+			"k8s_deployment": tableK8sDeployment(ctx),
+			"k8s_pod":        tableK8sPod(ctx),
+			"k8s_namespace":  tableK8sNamespace(ctx),
+			"k8s_node":       tableK8sNode(ctx),
+			"k8s_replicaset": tableK8sReplicaSet(ctx),
 		},
 	}
 
